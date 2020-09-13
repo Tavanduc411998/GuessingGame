@@ -1,0 +1,62 @@
+<html>
+    <head>
+        
+    </head>
+    <body>
+        <h2>Guessing Game in HTML</h2>
+        <div id="message"></div>
+        <div id="message2"></div>
+        <input id="inputNumber" type="number">
+        <button id="guessButton">Guess</button>
+
+        <script>
+            // lấy giá trị ngẫu nhiên
+            const getRandomInt = Math.floor(Math.random() * (100 - 1)) + 1;
+
+            var button = document.getElementById('guessButton');
+            var message = document.getElementById('message').innerHTML ="Welcome to Guessing Game."
+                + " You must guess the number between 0 and 100";
+
+            var i = 0;
+            var times = 10;
+            button.addEventListener('click', function() {
+                var userGuess = document.getElementById('inputNumber').value;
+                var number = parseInt(userGuess);
+                console.log("User's Guess:", number)
+
+                i++;
+                times--;
+
+                if (!number) {
+                    document.getElementById('message').innerHTML = 'please guess';
+                }
+                else if (times == 0) {
+                    document.getElementById('message').innerHTML = 'U lose';
+                    button.style.display = 'none';
+                }
+                else
+                {
+                    if (number < getRandomInt)
+                    {
+                        document.getElementById('message').innerHTML = 'Sorry your guess is too low. You have ' + times + ' remaining';
+                        document.getElementById('message').style.backgroundColor = 'red';
+                        document.getElementById('message2').innerHTML = "lần thứ " + i + ": " + number;
+                    }
+                    else if (number > getRandomInt)
+                    {
+                        document.getElementById('message').innerHTML = 'Sorry your guess is too high. You have ' + times + ' remaining';
+                        document.getElementById('message').style.backgroundColor = 'yellow';
+                        document.getElementById('message2').innerHTML = "lần thứ " + i + ": " + number;
+                    }
+                    else if (number == getRandomInt)
+                    {
+                        document.getElementById('message').innerHTML = 'Congratulations!! You guessed correctly.';
+                        document.getElementById('message').style.backgroundColor = 'green';
+                        document.getElementById('message2').innerHTML = "lần thứ " + i + ": " + number;
+                        button.style.display = 'none';
+                    }
+                }
+            });
+        </script>
+    </body>
+</html>
